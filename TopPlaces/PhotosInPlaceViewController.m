@@ -23,6 +23,18 @@
 
 #define PHOTOS_TO_DISPLAY 50
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"DisplayPhotoForPlace"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        NSDictionary* photo = [self.photosInPlace objectAtIndex:indexPath.row];
+        NSLog(@"prepared segue for %@", photo);
+        [segue.destinationViewController setPhoto:photo];
+        [segue.destinationViewController setDelegate:self];
+    }
+}
+
+
 - (void) setPlace:(NSDictionary *)place
 {
     self.curPlace = place;
@@ -45,12 +57,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.photosInPlace = [FlickrFetcher photosInPlace:self.curPlace maxResults:PHOTOS_TO_DISPLAY];
 
-// Get array of Top Places from Flickr using the API
     NSMutableArray *inPlacePhotos = [[NSMutableArray alloc] initWithArray:[FlickrFetcher photosInPlace:self.curPlace maxResults:50]];
     self.photosInPlace = inPlacePhotos;
-    NSLog(@"%@", self.photosInPlace);
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -87,11 +96,7 @@
     
     // Configure the cell...
     NSDictionary* photo = [self.photosInPlace  objectAtIndex:indexPath.row];
-    NSLog(@"%@", photo);
-    
-    cell.textLabel.text = [@"" stringByAppendingString:[photo valueForKeyPath:@"description._content"]];
-    NSLog(@"%@", cell.textLabel.text);
-
+    cell.textLabel.text = [@"Photo: " stringByAppendingString:[photo valueForKeyPath:@"description._content"]];
     return cell;
 }
 
@@ -133,22 +138,5 @@
     return YES;
 }
 */
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-    NSDictionary* photo = [self.photosInPlace objectAtIndex:indexPath.row];
-    self.photo = photo;
-    [self.delegate photosInPlaceViewController:self chosePhoto:photo];    
-    
-}
 
 @end

@@ -10,6 +10,7 @@
 		C58EF7D81547C96200B1BCBB /* TopPlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58EF7D71547C96200B1BCBB /* TopPlacesTableViewController.m */; };
 		C58EF7DC1547CE2300B1BCBB /* RecentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58EF7DB1547CE2300B1BCBB /* RecentsTableViewController.m */; };
 		C58EF7DF1547E68C00B1BCBB /* PhotosInPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58EF7DE1547E68C00B1BCBB /* PhotosInPlaceViewController.m */; };
+		C58EF7F61549228900B1BCBB /* DisplayPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58EF7F51549228900B1BCBB /* DisplayPhotoViewController.m */; };
 		C5F99A3E153D2CAB0004ED3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F99A3D153D2CAB0004ED3E /* UIKit.framework */; };
 		C5F99A40153D2CAB0004ED3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F99A3F153D2CAB0004ED3E /* Foundation.framework */; };
 		C5F99A42153D2CAB0004ED3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F99A41153D2CAB0004ED3E /* CoreGraphics.framework */; };
@@ -44,6 +45,8 @@
 		C58EF7DB1547CE2300B1BCBB /* RecentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsTableViewController.m; sourceTree = "<group>"; };
 		C58EF7DD1547E68C00B1BCBB /* PhotosInPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosInPlaceViewController.h; sourceTree = "<group>"; };
 		C58EF7DE1547E68C00B1BCBB /* PhotosInPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosInPlaceViewController.m; sourceTree = "<group>"; };
+		C58EF7F41549228900B1BCBB /* DisplayPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayPhotoViewController.h; sourceTree = "<group>"; };
+		C58EF7F51549228900B1BCBB /* DisplayPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayPhotoViewController.m; sourceTree = "<group>"; };
 		C5F99A39153D2CAB0004ED3E /* TopPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F99A3D153D2CAB0004ED3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C5F99A3F153D2CAB0004ED3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -134,6 +137,8 @@
 				C5F99A4F153D2CAB0004ED3E /* MainStoryboard_iPhone.storyboard */,
 				C58EF7DD1547E68C00B1BCBB /* PhotosInPlaceViewController.h */,
 				C58EF7DE1547E68C00B1BCBB /* PhotosInPlaceViewController.m */,
+				C58EF7F41549228900B1BCBB /* DisplayPhotoViewController.h */,
+				C58EF7F51549228900B1BCBB /* DisplayPhotoViewController.m */,
 				C58EF7DA1547CE2300B1BCBB /* RecentsTableViewController.h */,
 				C58EF7DB1547CE2300B1BCBB /* RecentsTableViewController.m */,
 				C58EF7D61547C96200B1BCBB /* TopPlacesTableViewController.h */,
@@ -291,6 +296,7 @@
 				C58EF7D81547C96200B1BCBB /* TopPlacesTableViewController.m in Sources */,
 				C58EF7DC1547CE2300B1BCBB /* RecentsTableViewController.m in Sources */,
 				C58EF7DF1547E68C00B1BCBB /* PhotosInPlaceViewController.m in Sources */,
+				C58EF7F61549228900B1BCBB /* DisplayPhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
