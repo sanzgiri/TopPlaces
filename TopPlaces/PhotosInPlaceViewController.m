@@ -45,7 +45,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.photosInPlace = [FlickrFetcher photosInPlace:self.curPlace maxResults:PHOTOS_TO_DISPLAY];
+//    self.photosInPlace = [FlickrFetcher photosInPlace:self.curPlace maxResults:PHOTOS_TO_DISPLAY];
+
+// Get array of Top Places from Flickr using the API
+    NSMutableArray *inPlacePhotos = [[NSMutableArray alloc] initWithArray:[FlickrFetcher photosInPlace:self.curPlace maxResults:50]];
+    self.photosInPlace = inPlacePhotos;
+    NSLog(@"%@", self.photosInPlace);
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

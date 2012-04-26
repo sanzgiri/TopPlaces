@@ -22,10 +22,15 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"ShowPhotosForPlace"]) {
-        [segue.destinationViewController setPlace:self.place];
+//        static NSString *CellIdentifier = @"TopPlacesPrototype";
+//        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        NSDictionary* place = [self.topPlaces  objectAtIndex:indexPath.row];
+        NSLog(@"prepared segue for %@", place);
+        [segue.destinationViewController setPlace:place];
         [segue.destinationViewController setDelegate:self];
     }
-    NSLog(@"prepared segue for %@", self.place);
+//    NSLog(@"prepared segue for %@", self.place);
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -124,6 +129,7 @@
 
 #pragma mark - Table view delegate
 
+#if 0
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
@@ -133,9 +139,12 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
+    NSLog(@"I am here");
     NSDictionary* place = [self.topPlaces objectAtIndex:indexPath.row];
     self.place = place;
     [self.delegate topPlacesTableViewController:self chosePlace:place];    
 }
+#endif
 
 @end
