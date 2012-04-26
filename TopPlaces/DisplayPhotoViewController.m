@@ -41,7 +41,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSURL *photoURL = [FlickrFetcher urlForPhoto:self.curPhoto format:FlickrPhotoFormatOriginal];
+    NSURL *photoURL = [FlickrFetcher urlForPhoto:self.curPhoto format:FlickrPhotoFormatLarge];
     NSLog(@"%@", photoURL);
     
     self.webView.scalesPageToFit = YES;
