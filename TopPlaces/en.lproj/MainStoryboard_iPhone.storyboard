@@ -191,7 +191,6 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M1o-6V-yyM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController definesPresentationContext="YES" id="t42-51-MFS" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="GVW-1R-e2b"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="qyB-EA-fSf">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -199,8 +198,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Fgu-xk-tAe" kind="relationship" relationship="viewControllers" id="C5g-gN-O7Q"/>
                         <segue destination="5fN-sT-fGx" kind="relationship" relationship="viewControllers" id="h1a-od-fPk"/>
+                        <segue destination="Fgu-xk-tAe" kind="relationship" relationship="viewControllers" id="C5g-gN-O7Q"/>
                     </connections>
                 </tabBarController>
             </objects>
@@ -229,4 +228,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="h1a-od-fPk"/>
+        <segue reference="e56-dZ-7uJ"/>
+    </inferredMetricsTieBreakers>
 </document>
