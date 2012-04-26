@@ -22,6 +22,7 @@
 @synthesize photo = _photo;
 
 #define PHOTOS_TO_DISPLAY 50
+static NSDictionary *lastPlace;
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -38,6 +39,7 @@
 - (void) setPlace:(NSDictionary *)place
 {
     self.curPlace = place;
+    lastPlace = place;
 }
 
 - (void)topPlacesTableViewController:(TopPlacesTableViewController *)sender chosePlace:(NSDictionary *)place
@@ -57,15 +59,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    NSMutableArray *inPlacePhotos = [[NSMutableArray alloc] initWithArray:[FlickrFetcher photosInPlace:self.curPlace maxResults:50]];
-    self.photosInPlace = inPlacePhotos;
+ //   NSMutableArray *inPlacePhotos = [[NSMutableArray alloc] initWithArray:[FlickrFetcher photosInPlace:self.curPlace maxResults:50]];
+ //   self.photosInPlace = inPlacePhotos;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.curPlace)
+    {
+        NSMutableArray *inPlacePhotos = [[NSMutableArray alloc] initWithArray:[FlickrFetcher photosInPlace:self.curPlace maxResults:50]];
+        self.photosInPlace = inPlacePhotos;
+    } else {
+        NSMutableArray *inPlacePhotos = [[NSMutableArray alloc] initWithArray:[FlickrFetcher photosInPlace:lastPlace maxResults:50]];
+        self.photosInPlace = inPlacePhotos;
+    }
+    
+    NSLog(@"Photos in Place view will appear");
 }
 
 - (void)viewDidUnload

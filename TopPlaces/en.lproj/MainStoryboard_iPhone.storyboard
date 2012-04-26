@@ -108,6 +108,17 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="7v5-wX-K6F">
+                            <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <barButtonItem title="Back" id="bag-fc-RgX">
+                                    <connections>
+                                        <segue destination="5fN-sT-fGx" kind="modal" id="z96-vL-roU"/>
+                                    </connections>
+                                </barButtonItem>
+                            </items>
+                        </toolbar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PhotosInPlacePrototype" textLabel="5xo-I1-bcC" style="IBUITableViewCellStyleDefault" id="iDY-Ua-vXp">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -136,7 +147,6 @@
                             <outlet property="delegate" destination="ZX0-yM-VRa" id="2YV-eV-7Ys"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="38I-Qk-LLS"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="-309" y="-823"/>
@@ -155,6 +165,17 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Iol-ui-roZ">
+                                <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Back" id="WiE-Qq-K6D">
+                                        <connections>
+                                            <segue destination="ZX0-yM-VRa" kind="modal" id="kTO-w9-Q1E"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
