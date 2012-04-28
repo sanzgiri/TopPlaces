@@ -83,7 +83,9 @@ static NSDictionary *lastPlace;
         self.photosInPlace = inPlacePhotos;
     }
     
-    NSLog(@"Photos in Place view will appear");
+    NSString *placeName = [self.curPlace valueForKey:@"_content"];
+    NSArray *placeNameArray = [placeName componentsSeparatedByString:@","];
+    [self setTitle:[[placeNameArray objectAtIndex:0] stringByAppendingString:@" Photos"]];
 }
 
 - (void)viewDidUnload
@@ -96,7 +98,10 @@ static NSDictionary *lastPlace;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+#if 0
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+#endif
+    return YES;
 }
 
 #pragma mark - Table view data source
@@ -112,9 +117,20 @@ static NSDictionary *lastPlace;
     static NSString *CellIdentifier = @"PhotosInPlacePrototype";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
     NSDictionary* photo = [self.photosInPlace  objectAtIndex:indexPath.row];
-    cell.textLabel.text = [@"Photo: " stringByAppendingString:[photo valueForKeyPath:@"description._content"]];
+
+    cell.textLabel.text = [photo valueForKeyPath:@"title"];
+    if ([cell.textLabel.text isEqualToString:@""]) {
+        cell.textLabel.text = [photo valueForKeyPath:@"description._content"];  
+        if ([cell.textLabel.text isEqualToString:@""]) {
+            cell.textLabel.text = @"Unknown";
+        }   
+        cell.detailTextLabel.text = @"";
+    } 
+    else {
+        cell.detailTextLabel.text = [photo valueForKeyPath:@"description._content"];
+    }
+    
     return cell;
 }
 

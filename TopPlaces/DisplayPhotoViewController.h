@@ -20,6 +20,7 @@
 @interface DisplayPhotoViewController : UIViewController
 
 @property (nonatomic, strong) NSDictionary *curPhoto;
+@property (nonatomic, strong) NSMutableArray *recentPhotos;
 @property (nonatomic, weak) id <DisplayPhotoViewControllerDelegate> delegate;
 - (void)setPhoto:(NSDictionary *)photo;
 

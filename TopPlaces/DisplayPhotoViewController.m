@@ -17,6 +17,7 @@
 @synthesize curPhoto = _curPhoto;
 @synthesize delegate = _delegate;
 @synthesize webView = _webView;
+@synthesize recentPhotos = _recentPhotos;
 
 - (void) setPhoto:(NSDictionary *)photo
 {
@@ -47,6 +48,21 @@
     self.webView.scalesPageToFit = YES;
     [self.webView loadRequest:[NSURLRequest requestWithURL:photoURL]];
     
+    NSString* viewTitle = [self.curPhoto valueForKeyPath:@"title"];
+    if ([viewTitle isEqualToString:@""]) {
+        viewTitle = [self.curPhoto valueForKeyPath:@"description._content"];  
+        if ([viewTitle isEqualToString:@""]) {
+            viewTitle = @"Unknown";
+        }   
+    }
+    [self setTitle:viewTitle];
+
+    NSInteger id = [self.curPhoto valueForKey:@"id"];
+    [self.recentPhotos  addObject:self.curPhoto];
+    if ([self.recentPhotos count] > 20)
+    {   
+        [self.recentPhotos removeLastObject];
+    }
 }
 
 - (void)viewDidUnload
@@ -57,7 +73,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+#if 0
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+#endif
+    return YES;
 }
 
 @end

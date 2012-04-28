@@ -41,8 +41,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.topPlaces = [FlickrFetcher topPlaces];
-        
+    
+    // Code to sort array of dictionaries using key "_content"
+    NSMutableArray* ffTopPlaces = [[FlickrFetcher topPlaces] mutableCopy];    
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"_content"  ascending:YES];
+    [ffTopPlaces sortUsingDescriptors:[NSArray arrayWithObjects:descriptor,nil]];
+    self.topPlaces = [ffTopPlaces copy];
+    [self setTitle:@"Top Places"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -59,7 +65,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+#if 0
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+#endif
+    return YES;
 }
 
 #pragma mark - Table view data source
@@ -75,7 +84,10 @@
     static NSString *CellIdentifier = @"TopPlacesPrototype";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     NSDictionary* place = [self.topPlaces  objectAtIndex:indexPath.row];
-    cell.textLabel.text = [@"" stringByAppendingString:[place valueForKey:@"_content"]];
+    NSString *placeName = [place valueForKey:@"_content"];
+    NSArray *placeNameArray = [placeName componentsSeparatedByString:@","];
+    cell.textLabel.text = [placeNameArray objectAtIndex:0];
+    cell.detailTextLabel.text = [[[placeNameArray objectAtIndex:1] stringByAppendingString:@", "]stringByAppendingFormat:[placeNameArray objectAtIndex:2]];
     return cell;
 }
 
