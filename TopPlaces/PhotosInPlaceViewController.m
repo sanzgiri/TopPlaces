@@ -20,6 +20,7 @@
 @synthesize delegate = _delegate;
 @synthesize curPlace = _curPlace;
 @synthesize photo = _photo;
+//minor change
 
 #define PHOTOS_TO_DISPLAY 50
 static NSDictionary *lastPlace;
