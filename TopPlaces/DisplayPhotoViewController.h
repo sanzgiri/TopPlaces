@@ -14,16 +14,16 @@
 @protocol DisplayPhotoViewControllerDelegate 
 @optional
 - (void)displayPhotoViewController:(DisplayPhotoViewController *)sender
-                         chosePhoto:(id)photo;
+                         chosePhotos:(NSMutableArray *)recentPhotosArray;
 @end
 
 @interface DisplayPhotoViewController : UIViewController
 
+#define MAX_RECENT_PHOTOS 20
 @property (nonatomic, strong) NSDictionary *curPhoto;
 @property (nonatomic, strong) NSMutableArray *recentPhotos;
 @property (nonatomic, weak) id <DisplayPhotoViewControllerDelegate> delegate;
 - (void)setPhoto:(NSDictionary *)photo;
-
-
++ (NSArray *)getRecentPhotos;
 
 @end

@@ -23,5 +23,5 @@
 @property (nonatomic, strong) NSDictionary *photo;
 @property (nonatomic, weak) id <PhotosInPlaceViewControllerDelegate> delegate;
 - (void)setPlace:(NSDictionary *)place;
-
+#define FAVORITES_KEY @"DisplayPhotoViewController.Favorites"
 @end

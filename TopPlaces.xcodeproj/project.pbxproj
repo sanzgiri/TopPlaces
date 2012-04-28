@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C53CE6B4154C640A0051ACE5 /* RecentPhotosDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C53CE6B3154C640A0051ACE5 /* RecentPhotosDisplayViewController.m */; };
 		C58EF7D81547C96200B1BCBB /* TopPlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58EF7D71547C96200B1BCBB /* TopPlacesTableViewController.m */; };
 		C58EF7DC1547CE2300B1BCBB /* RecentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58EF7DB1547CE2300B1BCBB /* RecentsTableViewController.m */; };
 		C58EF7DF1547E68C00B1BCBB /* PhotosInPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58EF7DE1547E68C00B1BCBB /* PhotosInPlaceViewController.m */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C53CE6B2154C640A0051ACE5 /* RecentPhotosDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPhotosDisplayViewController.h; sourceTree = "<group>"; };
+		C53CE6B3154C640A0051ACE5 /* RecentPhotosDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPhotosDisplayViewController.m; sourceTree = "<group>"; };
 		C58EF7D61547C96200B1BCBB /* TopPlacesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlacesTableViewController.h; sourceTree = "<group>"; };
 		C58EF7D71547C96200B1BCBB /* TopPlacesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlacesTableViewController.m; sourceTree = "<group>"; };
 		C58EF7DA1547CE2300B1BCBB /* RecentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsTableViewController.h; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				C5F99A4C153D2CAB0004ED3E /* TopPlacesAppDelegate.h */,
 				C5F99A4D153D2CAB0004ED3E /* TopPlacesAppDelegate.m */,
 				C5F99A4F153D2CAB0004ED3E /* MainStoryboard_iPhone.storyboard */,
+				C53CE6B2154C640A0051ACE5 /* RecentPhotosDisplayViewController.h */,
+				C53CE6B3154C640A0051ACE5 /* RecentPhotosDisplayViewController.m */,
 				C58EF7DD1547E68C00B1BCBB /* PhotosInPlaceViewController.h */,
 				C58EF7DE1547E68C00B1BCBB /* PhotosInPlaceViewController.m */,
 				C58EF7F41549228900B1BCBB /* DisplayPhotoViewController.h */,
@@ -297,6 +302,7 @@
 				C58EF7DC1547CE2300B1BCBB /* RecentsTableViewController.m in Sources */,
 				C58EF7DF1547E68C00B1BCBB /* PhotosInPlaceViewController.m in Sources */,
 				C58EF7F61549228900B1BCBB /* DisplayPhotoViewController.m in Sources */,
+				C53CE6B4154C640A0051ACE5 /* RecentPhotosDisplayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

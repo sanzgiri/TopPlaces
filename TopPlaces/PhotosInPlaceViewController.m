@@ -23,16 +23,53 @@
 
 
 #define PHOTOS_TO_DISPLAY 50
+
+
 static NSDictionary *lastPlace;
+//static NSMutableArray *recentPhotos;
+
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"DisplayPhotoForPlace"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSDictionary* photo = [self.photosInPlace objectAtIndex:indexPath.row];
-        NSLog(@"prepared segue for %@", photo);
+//        NSLog(@"prepared segue for %@", photo);
+        self.photo = photo;
         [segue.destinationViewController setPhoto:photo];
-        [segue.destinationViewController setDelegate:self];
+//       [segue.destinationViewController setDelegate:self];
+//        [self.delegate photosInPlaceViewController:self chosePhoto:self.photo];
+//        NSLog(@"Delegating photo %@ from photosInPlace", self.photo);
+
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
+        if (!favorites) favorites = [NSMutableArray array];
+        [favorites addObject:self.photo];
+        [defaults setObject:favorites forKey:FAVORITES_KEY];
+        [defaults synchronize]; 
+        
+ //       NSLog(@"defaults = %@", defaults);
+   //     NSLog(@"favorites = %@", favorites);
+        
+#if 0    
+        id curPhoto_id = [photo valueForKey:@"id"];
+        NSLog(@"curphotoid = %d", (int)curPhoto_id);
+        
+        if (recentPhotos == nil)
+        {
+            recentPhotos = [[NSMutableArray alloc] init];
+        }
+        int count = [recentPhotos count];
+        
+        if (count < 20)
+        {
+            [recentPhotos insertObject:curPhoto_id atIndex:count];
+            NSLog(@"added first photo!");
+            NSLog(@"count = %d", count);
+            NSLog(@"recentPhotos = %@", recentPhotos);
+        }    
+#endif   
+        
     }
 }
 
@@ -132,6 +169,27 @@ static NSDictionary *lastPlace;
     }
     
     return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+#if 0
+    NSDictionary* place = [self.topPlaces objectAtIndex:indexPath.row];
+    self.place = place;
+    [self.delegate topPlacesTableViewController:self chosePlace:place];   
+
+    [self.delegate photosInPlaceViewController:self chosePhoto:self.photo];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
+    if (!favorites) favorites = [NSMutableArray array];
+    [favorites addObject:self.photo];
+    [defaults setObject:favorites forKey:FAVORITES_KEY];
+    [defaults synchronize];
+   
+    NSLog(@"Delegating photo %@ from photosInPlace", self.photo);
+#endif  
 }
 
 /*

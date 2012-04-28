@@ -7,26 +7,69 @@
 //
 
 #import "RecentsTableViewController.h"
+#import "DisplayPhotoViewController.h"
+#import "PhotosInPlaceViewController.h"
 
-@interface RecentsTableViewController ()
+@interface RecentsTableViewController () <PhotosInPlaceViewControllerDelegate>
 
 @end
 
 @implementation RecentsTableViewController
 
+@synthesize recentPhotosToDisplay = _recentPhotosToDisplay;
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"DisplayRecentPhoto"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
+        NSDictionary* photo = [favorites objectAtIndex:indexPath.row];
+        NSLog(@"prepared segue for %@", photo);
+        [segue.destinationViewController setPhoto:photo];
+//        [segue.destinationViewController setDelegate:self];
+    }
+}
+
+#if 0
+- (void)displayPhotoViewController:(DisplayPhotoViewController *)sender chosePhotos:(NSMutableArray *)recentPhotosArray;
+{ 
+    NSLog(@"recentPhotos = %@", recentPhotosArray);
+    self.recentPhotosToDisplay = [recentPhotosArray copy];
+}
+#endif
+
+- (void)photosInPlaceViewController:(PhotosInPlaceViewController *)sender
+                         chosePhoto:(id)photo;
+{
+    NSLog(@"received photo = %@", photo);
+}
+
+- (void) setRecentPhotosToDisplay:(NSArray *)recentPhotosToDisplay
+{
+//    self.recentPhotosToDisplay = [DisplayPhotoViewController getRecentPhotos];
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
+#if 0
     if (self) {
-        // Custom initialization
+        self.recentPhotosToDisplay = [[NSMutableArray alloc] initWithCapacity:MAX_RECENT_PHOTOS];
     }
+#endif
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
+//    self.recentPhotosToDisplay = [favorites mutableCopy];
+//    NSLog(@"recentPhotosToDisplay %@", self.recentPhotosToDisplay);
+    [self setTitle:@"Recent Photos"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -48,28 +91,36 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return MAX_RECENT_PHOTOS;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"RecentPhotosPrototype";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
     
-    return cell;
+    NSDictionary* photo = [favorites objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [photo valueForKeyPath:@"title"];
+    if ([cell.textLabel.text isEqualToString:@""]) {
+        cell.textLabel.text = [photo valueForKeyPath:@"description._content"];  
+        if ([cell.textLabel.text isEqualToString:@""]) {
+            cell.textLabel.text = @"Unknown";
+        }   
+        cell.detailTextLabel.text = @"";
+    } 
+    else {
+        cell.detailTextLabel.text = [photo valueForKeyPath:@"description._content"];
+    }
+    
+    return cell;    
 }
 
 /*
@@ -111,17 +162,5 @@
 }
 */
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
 
 @end

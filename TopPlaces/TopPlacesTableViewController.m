@@ -25,7 +25,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSDictionary* place = [self.topPlaces  objectAtIndex:indexPath.row];
         [segue.destinationViewController setPlace:place];
-        [segue.destinationViewController setDelegate:self];
+//        [segue.destinationViewController setDelegate:self];
     }
 }
 
@@ -87,7 +87,13 @@
     NSString *placeName = [place valueForKey:@"_content"];
     NSArray *placeNameArray = [placeName componentsSeparatedByString:@","];
     cell.textLabel.text = [placeNameArray objectAtIndex:0];
-    cell.detailTextLabel.text = [[[placeNameArray objectAtIndex:1] stringByAppendingString:@", "]stringByAppendingFormat:[placeNameArray objectAtIndex:2]];
+
+    if ([placeNameArray count] > 2)
+    {
+        cell.detailTextLabel.text = [[[placeNameArray objectAtIndex:1] stringByAppendingString:@", "]stringByAppendingFormat:[placeNameArray objectAtIndex:2]]; 
+    } else {
+           cell.detailTextLabel.text = [placeNameArray objectAtIndex:1];
+    }
     return cell;
 }
 
