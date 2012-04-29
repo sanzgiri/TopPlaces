@@ -21,7 +21,6 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
-        NSLog(@"size of favorites = %d", [favorites count]);
         NSDictionary* photo = [favorites objectAtIndex:indexPath.row];
         [segue.destinationViewController setPhoto:photo];
     }
@@ -57,7 +56,8 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 #pragma mark - Table view data source
