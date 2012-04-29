@@ -9,7 +9,6 @@
 #import "RecentPhotosDisplayViewController.h"
 
 @interface RecentPhotosDisplayViewController ()
-
 @end
 
 @implementation RecentPhotosDisplayViewController

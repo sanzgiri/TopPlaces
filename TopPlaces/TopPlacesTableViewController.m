@@ -16,7 +16,6 @@
 @implementation TopPlacesTableViewController
 
 @synthesize topPlaces = _topPlaces;
-@synthesize delegate = _delegate;
 @synthesize place = _place;
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -25,7 +24,6 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSDictionary* place = [self.topPlaces  objectAtIndex:indexPath.row];
         [segue.destinationViewController setPlace:place];
-//        [segue.destinationViewController setDelegate:self];
     }
 }
 
@@ -65,14 +63,11 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-#if 0
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-#endif
+//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
     return YES;
 }
 
 #pragma mark - Table view data source
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

@@ -9,5 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface RecentsTableViewController : UITableViewController
-@property (nonatomic, strong) NSMutableArray *recentPhotosToDisplay;
 @end

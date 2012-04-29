@@ -10,16 +10,9 @@
 
 @class TopPlacesTableViewController;
 
-@protocol TopPlacesTableViewControllerDelegate 
-@optional
-- (void)topPlacesTableViewController:(TopPlacesTableViewController *)sender
-                                 chosePlace:(NSDictionary *)place;
-@end
-
 @interface TopPlacesTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSArray *topPlaces; 
 @property (nonatomic, strong) NSDictionary *place;
-@property (nonatomic, weak) id <TopPlacesTableViewControllerDelegate> delegate;
 
 @end

@@ -10,18 +10,16 @@
 
 @class PhotosInPlaceViewController;
 
-@protocol PhotosInPlaceViewControllerDelegate 
-@optional
-- (void)photosInPlaceViewController:(PhotosInPlaceViewController *)sender
-                          chosePhoto:(id)photo;
-@end
-
 @interface PhotosInPlaceViewController : UITableViewController
 
 @property (nonatomic, strong) NSArray *photosInPlace; 
 @property (nonatomic, strong) NSDictionary *curPlace;
 @property (nonatomic, strong) NSDictionary *photo;
-@property (nonatomic, weak) id <PhotosInPlaceViewControllerDelegate> delegate;
+
 - (void)setPlace:(NSDictionary *)place;
+
 #define FAVORITES_KEY @"DisplayPhotoViewController.Favorites"
+#define PHOTOS_TO_DISPLAY 50
+#define MAX_RECENT_PHOTOS 20
+
 @end

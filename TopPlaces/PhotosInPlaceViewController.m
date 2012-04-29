@@ -7,81 +7,55 @@
 //
 
 #import "PhotosInPlaceViewController.h"
-#import "TopPlacesTableViewController.h"
 #import "FlickrFetcher.h"
 
 @interface PhotosInPlaceViewController ()
-
 @end
 
 @implementation PhotosInPlaceViewController
 
 @synthesize photosInPlace = _photosInPlace;
-@synthesize delegate = _delegate;
 @synthesize curPlace = _curPlace;
 @synthesize photo = _photo;
-
-
-#define PHOTOS_TO_DISPLAY 50
-
-
-static NSDictionary *lastPlace;
-//static NSMutableArray *recentPhotos;
-
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"DisplayPhotoForPlace"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSDictionary* photo = [self.photosInPlace objectAtIndex:indexPath.row];
-//        NSLog(@"prepared segue for %@", photo);
         self.photo = photo;
         [segue.destinationViewController setPhoto:photo];
-//       [segue.destinationViewController setDelegate:self];
-//        [self.delegate photosInPlaceViewController:self chosePhoto:self.photo];
-//        NSLog(@"Delegating photo %@ from photosInPlace", self.photo);
 
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
         if (!favorites) favorites = [NSMutableArray array];
-        [favorites addObject:self.photo];
+        
+        int cur_photo_id = (int) [self.photo valueForKey:@"id"];
+        BOOL add_photo = YES;
+        for (int i = 0; i < [favorites count]; i++)
+        {
+            int photo_id = (int) [[favorites objectAtIndex:i] valueForKey:@"id"];
+            if (cur_photo_id == photo_id)
+            {
+                add_photo = NO;
+            }
+        }
+        
+        if (add_photo == YES)
+        {
+            [favorites insertObject:self.photo atIndex:0];
+            if ([favorites count] > MAX_RECENT_PHOTOS)
+            {
+                [favorites removeLastObject];
+            }
+        }
         [defaults setObject:favorites forKey:FAVORITES_KEY];
         [defaults synchronize]; 
-        
- //       NSLog(@"defaults = %@", defaults);
-   //     NSLog(@"favorites = %@", favorites);
-        
-#if 0    
-        id curPhoto_id = [photo valueForKey:@"id"];
-        NSLog(@"curphotoid = %d", (int)curPhoto_id);
-        
-        if (recentPhotos == nil)
-        {
-            recentPhotos = [[NSMutableArray alloc] init];
-        }
-        int count = [recentPhotos count];
-        
-        if (count < 20)
-        {
-            [recentPhotos insertObject:curPhoto_id atIndex:count];
-            NSLog(@"added first photo!");
-            NSLog(@"count = %d", count);
-            NSLog(@"recentPhotos = %@", recentPhotos);
-        }    
-#endif   
-        
     }
 }
 
-
 - (void) setPlace:(NSDictionary *)place
 {
-    self.curPlace = place;
-    lastPlace = place;
-}
-
-- (void)topPlacesTableViewController:(TopPlacesTableViewController *)sender chosePlace:(NSDictionary *)place
-{ 
     self.curPlace = place;
 }
 
@@ -97,8 +71,6 @@ static NSDictionary *lastPlace;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- //   NSMutableArray *inPlacePhotos = [[NSMutableArray alloc] initWithArray:[FlickrFetcher photosInPlace:self.curPlace maxResults:50]];
- //   self.photosInPlace = inPlacePhotos;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -114,9 +86,6 @@ static NSDictionary *lastPlace;
     if (self.curPlace)
     {
         NSMutableArray *inPlacePhotos = [[NSMutableArray alloc] initWithArray:[FlickrFetcher photosInPlace:self.curPlace maxResults:50]];
-        self.photosInPlace = inPlacePhotos;
-    } else {
-        NSMutableArray *inPlacePhotos = [[NSMutableArray alloc] initWithArray:[FlickrFetcher photosInPlace:lastPlace maxResults:50]];
         self.photosInPlace = inPlacePhotos;
     }
     
@@ -135,14 +104,11 @@ static NSDictionary *lastPlace;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-#if 0
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-#endif
+//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
     return YES;
 }
 
 #pragma mark - Table view data source
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -169,27 +135,6 @@ static NSDictionary *lastPlace;
     }
     
     return cell;
-}
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-#if 0
-    NSDictionary* place = [self.topPlaces objectAtIndex:indexPath.row];
-    self.place = place;
-    [self.delegate topPlacesTableViewController:self chosePlace:place];   
-
-    [self.delegate photosInPlaceViewController:self chosePhoto:self.photo];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
-    if (!favorites) favorites = [NSMutableArray array];
-    [favorites addObject:self.photo];
-    [defaults setObject:favorites forKey:FAVORITES_KEY];
-    [defaults synchronize];
-   
-    NSLog(@"Delegating photo %@ from photosInPlace", self.photo);
-#endif  
 }
 
 /*

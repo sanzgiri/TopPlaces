@@ -10,5 +10,4 @@
 #include "DisplayPhotoViewController.h"
 
 @interface RecentPhotosDisplayViewController : DisplayPhotoViewController
-
 @end

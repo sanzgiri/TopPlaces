@@ -7,16 +7,13 @@
 //
 
 #import "RecentsTableViewController.h"
-#import "DisplayPhotoViewController.h"
 #import "PhotosInPlaceViewController.h"
 
-@interface RecentsTableViewController () <PhotosInPlaceViewControllerDelegate>
+@interface RecentsTableViewController () 
 
 @end
 
 @implementation RecentsTableViewController
-
-@synthesize recentPhotosToDisplay = _recentPhotosToDisplay;
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -24,50 +21,24 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
+        NSLog(@"size of favorites = %d", [favorites count]);
         NSDictionary* photo = [favorites objectAtIndex:indexPath.row];
-        NSLog(@"prepared segue for %@", photo);
         [segue.destinationViewController setPhoto:photo];
-//        [segue.destinationViewController setDelegate:self];
     }
-}
-
-#if 0
-- (void)displayPhotoViewController:(DisplayPhotoViewController *)sender chosePhotos:(NSMutableArray *)recentPhotosArray;
-{ 
-    NSLog(@"recentPhotos = %@", recentPhotosArray);
-    self.recentPhotosToDisplay = [recentPhotosArray copy];
-}
-#endif
-
-- (void)photosInPlaceViewController:(PhotosInPlaceViewController *)sender
-                         chosePhoto:(id)photo;
-{
-    NSLog(@"received photo = %@", photo);
-}
-
-- (void) setRecentPhotosToDisplay:(NSArray *)recentPhotosToDisplay
-{
-//    self.recentPhotosToDisplay = [DisplayPhotoViewController getRecentPhotos];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-#if 0
     if (self) {
-        self.recentPhotosToDisplay = [[NSMutableArray alloc] initWithCapacity:MAX_RECENT_PHOTOS];
+ 
     }
-#endif
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
-//    self.recentPhotosToDisplay = [favorites mutableCopy];
-//    NSLog(@"recentPhotosToDisplay %@", self.recentPhotosToDisplay);
     [self setTitle:@"Recent Photos"];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -91,11 +62,11 @@
 
 #pragma mark - Table view data source
 
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return MAX_RECENT_PHOTOS;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
+    return [favorites count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,7 +76,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
-    
+
     NSDictionary* photo = [favorites objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [photo valueForKeyPath:@"title"];
